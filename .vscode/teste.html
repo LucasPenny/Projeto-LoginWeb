@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
   }
   #container {
     display: flex;
@@ -29,6 +30,7 @@
     border-right: 1px solid #ddd;
     padding-top: 20px;
     box-sizing: border-box;
+    flex-shrink: 0;
   }
   nav label {
     display: block;
@@ -113,18 +115,6 @@
     height: 16px;
     margin-right: 6px;
   }
-  .file-info {
-    display: flex;
-    align-items: center;
-    color: #666;
-    font-size: 14px;
-  }
-  #fileName {
-    color: #0057B7;
-    font-size: 14px;
-    margin-left: 8px;
-    font-weight: bold;
-  }
   .btn-enviar {
     background-color: #0057B7;
     color: white;
@@ -134,6 +124,7 @@
     cursor: pointer;
     flex-grow: 1;
     font-size: 16px;
+    min-width: 150px;
   }
   aside {
     width: 300px;
@@ -142,6 +133,7 @@
     background-color: #f8faff;
     overflow-y: auto;
     box-sizing: border-box;
+    flex-shrink: 0;
   }
   aside h3 {
     margin-top: 0;
@@ -173,22 +165,71 @@
   .chamado a:hover {
     text-decoration: underline;
   }
-
-  @media (max-width: 1024px) {
-    .container {
-      flex-direction: column;
+  #fileName {
+    color: #0057B7;
+    font-size: 14px;
+    margin-left: 8px;
   }
-}  
 
-@media (max-width: 768px){
-}
-  /* Scrollbar for aside and main */
+  /* Scrollbar */
   aside::-webkit-scrollbar, main::-webkit-scrollbar {
     width: 8px;
   }
   aside::-webkit-scrollbar-thumb, main::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 4px;
+  }
+
+  /* RESPONSIVIDADE */
+  @media (max-width: 1024px) {
+    #container {
+      flex-direction: column;
+      height: auto;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+      padding: 0;
+    }
+    nav label {
+      flex: 1;
+      text-align: center;
+      border-left: none;
+      border-bottom: 4px solid transparent;
+      padding: 12px;
+    }
+    input[type="radio"]:checked + label {
+      border-bottom-color: #0057B7;
+      border-left: none;
+    }
+    main {
+      order: 2;
+    }
+    aside {
+      width: 100%;
+      border-left: none;
+      border-top: 1px solid #ddd;
+      order: 3;
+    }
+  }
+
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .btn-enviar {
+      width: 100%;
+      flex-grow: unset;
+    }
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>
 </head>
@@ -237,9 +278,6 @@
             Anexo
           </label>
           <input type="file" id="fileUpload" name="anexo" style="display:none" />
-          <div class="file-info">
-            <span id="fileName">Nenhum arquivo selecionado</span>
-          </div>
           <button type="submit" class="btn-enviar">Enviar Chamado</button>
         </div>
       </form>
@@ -295,19 +333,6 @@
     </div>
   </aside>
 </div>
-
-<script>
-  // Script para mostrar o nome do arquivo selecionado
-  document.getElementById('fileUpload').addEventListener('change', function(event) {
-    const fileNameElement = document.getElementById('fileName');
-    const file = event.target.files[0];
-    if (file) {
-      fileNameElement.textContent = file.name;
-    } else {
-      fileNameElement.textContent = 'Nenhum arquivo selecionado';
-    }
-  });
-</script>
 
 </body>
 </html>

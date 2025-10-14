@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Administrador - Suporte Técnico</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+  }
+
+  header {
+    background-color: #0057B7;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  header h1 {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .coluna {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .coluna-esquerda {
+    flex: 1.4;
+  }
+
+  .coluna-direita {
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  /* --- Lista de Técnicos --- */
+  .tabela {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+  }
+
+  .tabela-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+  .tabela-item:last-child {
+    border-bottom: none;
+  }
+
+  .status-online {
+    color: green;
+    font-weight: bold;
+  }
+
+  .status-ausente {
+    color: orange;
+    font-weight: bold;
+  }
+
+  .status-offline {
+    color: gray;
+    font-weight: bold;
+  }
+
+  .search-area {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .search-area input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .btn-search {
+    background-color: #0057B7;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .btn-search:hover {
+    background-color: #004999;
+  }
+
+  /* --- Lista de Clientes --- */
+  .clientes .tabela-item {
+    justify-content: space-between;
+  }
+
+  .btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .btn-editar {
+    background-color: #0057B7;
+  }
+
+  .btn-excluir {
+    background-color: #e60000;
+  }
+
+  .btn-editar:hover {
+    background-color: #004999;
+  }
+
+  .btn-excluir:hover {
+    background-color: #c40000;
+  }
+
+  /* --- Relatórios --- */
+  .filtros select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .btn-gerar {
+    width: 100%;
+    background-color: #0057B7;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn-gerar:hover {
+    background-color: #004999;
+  }
+
+  /* --- Gráfico (simulado com CSS) --- */
+  .grafico {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 180px;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .barra {
+    width: 50px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+  .aberto { height: 60px; background-color: #007bff; }
+  .em-atendimento { height: 40px; background-color: #ff9900; }
+  .resolvido { height: 120px; background-color: #28a745; }
+  .encerrado { height: 100px; background-color: #6c757d; }
+
+  .legenda {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+
+  .legenda span {
+    text-align: center;
+    width: 70px;
+  }
+
+  /* --- Responsividade --- */
+  @media (max-width: 950px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎧 Suporte Técnico</h1>
+  <span>👤 Administrador</span>
+</header>
+
+<div class="container">
+
+  <!-- Coluna Esquerda -->
+  <div class="coluna coluna-esquerda">
+    <h2>Gerenciamento de Usuários</h2>
+
+    <h3>Lista de Técnicos</h3>
+    <div class="tabela">
+      <div class="tabela-item">
+        <span>John Doe</span><span>Técnico</span><span class="status-online">Online</span>
+      </div>
+      <div class="tabela-item">
+        <span>Jane Smith</span><span>Técnico</span><span class="status-ausente">Ausente</span>
+      </div>
+      <div class="tabela-item">
+        <span>Alex Johnson</span><span>Técnico</span><span class="status-offline">Offline</span>
+      </div>
+    </div>
+
+    <div class="search-area">
+      <input type="text" placeholder="Insira o nome ou email do técnico">
+      <button class="btn-search">🔍 Procurar</button>
+    </div>
+
+    <h3>Lista de Clientes Adicionados Recentemente</h3>
+    <div class="tabela clientes">
+      <div class="tabela-item">
+        <span>Alan Deany</span>
+        <div>
+          <button class="btn btn-editar">Editar</button>
+          <button class="btn btn-excluir">Excluir</button>
+        </div>
+      </div>
+      <div class="tabela-item">
+        <span>Julia Lisboa</span>
+        <div>
+          <button class="btn btn-editar">Editar</button>
+          <button class="btn btn-excluir">Excluir</button>
+        </div>
+      </div>
+      <div class="tabela-item">
+        <span>Daniele R. Jaquelini</span>
+        <div>
+          <button class="btn btn-editar">Editar</button>
+          <button class="btn btn-excluir">Excluir</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-area">
+      <input type="text" placeholder="Insira o nome ou email do cliente">
+      <button class="btn-search">🔍 Procurar</button>
+    </div>
+  </div>
+
+  <!-- Coluna Direita -->
+  <div class="coluna coluna-direita">
+    <h2>Relatórios</h2>
+    <h3>Filtros de Relatórios</h3>
+
+    <div class="filtros">
+      <label>Período</label>
+      <select>
+        <option>Últimos 7 Dias</option>
+        <option>Últimos 30 Dias</option>
+        <option>Últimos 3 Meses</option>
+      </select>
+
+      <label>Técnico</label>
+      <select>
+        <option>Todos os Técnicos</option>
+        <option>John Doe</option>
+        <option>Jane Smith</option>
+        <option>Alex Johnson</option>
+      </select>
+
+      <label>Categoria</label>
+      <select>
+        <option>Todas as Categorias</option>
+        <option>Hardware</option>
+        <option>Software</option>
+        <option>Rede</option>
+      </select>
+
+      <label>Prioridade</label>
+      <select>
+        <option>Todas as Prioridades</option>
+        <option>Alta</option>
+        <option>Média</option>
+        <option>Baixa</option>
+      </select>
+
+      <button class="btn-gerar">Gerar Relatório</button>
+    </div>
+
+    <!-- Gráfico -->
+    <div class="grafico">
+      <div class="barra aberto">10</div>
+      <div class="barra em-atendimento">8</div>
+      <div class="barra resolvido">25</div>
+      <div class="barra encerrado">20</div>
+    </div>
+
+    <div class="legenda">
+      <span>Aberto</span>
+      <span>Em Atendimento</span>
+      <span>Resolvido</span>
+      <span>Encerrado</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

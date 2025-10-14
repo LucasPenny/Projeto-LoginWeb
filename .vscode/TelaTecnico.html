@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suporte Técnico - Painel do Técnico</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+  }
+
+  header {
+    background-color: #0057B7;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  header h1 {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    height: calc(100vh - 60px);
+  }
+
+  /* --- Estrutura das 3 colunas --- */
+  .coluna {
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    overflow-y: auto;
+  }
+
+  .coluna-esquerda {
+    flex: 1.2;
+  }
+
+  .coluna-centro {
+    flex: 2;
+  }
+
+  .coluna-direita {
+    flex: 1.3;
+  }
+
+  /* --- Campos e filtros --- */
+  label {
+    font-size: 13px;
+    color: #333;
+  }
+
+  select, input[type="date"], textarea, input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  /* --- Chamados --- */
+  .chamado {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .chamado strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: #0057B7;
+    color: #fff;
+    text-align: center;
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background-color: #004999;
+  }
+
+  /* --- Detalhes do chamado --- */
+  .status {
+    color: #007b00;
+    font-weight: bold;
+  }
+
+  .historico {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    height: 100px;
+    overflow-y: auto;
+    font-size: 13px;
+  }
+
+  .btn-enviar, .btn-fechar {
+    width: 100%;
+    background-color: #0057B7;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-enviar:hover, .btn-fechar:hover {
+    background-color: #004999;
+  }
+
+  /* --- Rádio buttons --- */
+  .radio-group {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .radio-group label {
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💻 Suporte Técnico</h1>
+  <span>Técnico</span>
+</header>
+
+<div class="container">
+
+  <!-- Coluna Esquerda -->
+  <div class="coluna coluna-esquerda">
+    <h3>Lista de Chamados</h3>
+
+    <label for="status">Status</label>
+    <select id="status">
+      <option>Todos</option>
+      <option>Aberto</option>
+      <option>Em Atendimento</option>
+      <option>Fechado</option>
+    </select>
+
+    <label for="prioridade">Prioridade</label>
+    <select id="prioridade">
+      <option>Todos</option>
+      <option>Alta</option>
+      <option>Média</option>
+      <option>Baixa</option>
+    </select>
+
+    <label for="data">Data</label>
+    <input type="date" id="data">
+
+    <!-- Lista de chamados -->
+    <div class="chamado">
+      <strong>Chamado 1234</strong>
+      <span>Status: <span style="color:green;">Aberto</span></span><br>
+      <span>Prioridade: <b style="color:red;">Alta</b></span><br><br>
+      <button class="btn">Abrir Chamado</button>
+    </div>
+
+    <div class="chamado">
+      <strong>Chamado 1235</strong>
+      <span>Status: <span style="color:orange;">Em Atendimento</span></span><br>
+      <span>Prioridade: <b style="color:darkorange;">Média</b></span><br><br>
+      <button class="btn">Abrir Chamado</button>
+    </div>
+
+    <div class="chamado">
+      <strong>Chamado 2235</strong>
+      <span>Status: <span style="color:green;">Aberto</span></span><br>
+      <span>Prioridade: <b style="color:green;">Baixa</b></span><br><br>
+      <button class="btn">Abrir Chamado</button>
+    </div>
+
+    <div class="chamado">
+      <strong>Chamado 1236</strong>
+      <span>Status: <span style="color:orange;">Em Atendimento</span></span><br>
+      <span>Prioridade: <b style="color:green;">Baixa</b></span><br><br>
+      <button class="btn">Abrir Chamado</button>
+    </div>
+  </div>
+
+  <!-- Coluna Central -->
+  <div class="coluna coluna-centro">
+    <h3>Detalhes do Chamado 1234</h3>
+    <p><strong>Título:</strong> Título do chamado</p>
+    <p><strong>Descrição:</strong> Descrição do chamado</p>
+    <p><strong>Status Atual:</strong> <span class="status">Aberto</span></p>
+
+    <h4>Histórico de Mensagens</h4>
+    <div class="historico">
+      Mensagens que ocorreram entre técnico responsável e cliente.
+    </div>
+
+    <input type="text" placeholder="Nova Mensagem">
+    <input type="text" placeholder="Sugerir Solução">
+
+    <p><strong>Atualizar Status para:</strong> <span style="color:orange;">Em Atendimento</span></p>
+    <button class="btn-enviar">Enviar Solução</button>
+  </div>
+
+  <!-- Coluna Direita -->
+  <div class="coluna coluna-direita">
+    <h3>Solução Sugerida</h3>
+    <textarea placeholder="Descrição da Solução"></textarea>
+    <button class="btn">Salvar Solução</button>
+
+    <div class="radio-group">
+      <p><strong>Encerrar Chamado</strong></p>
+      <label><input type="radio" name="status-final"> Resolvido</label>
+      <label><input type="radio" name="status-final"> Encerrado</label>
+    </div>
+
+    <button class="btn-fechar">Fechar Chamado</button>
+  </div>
+
+</div>
+
+</body>
+</html>
